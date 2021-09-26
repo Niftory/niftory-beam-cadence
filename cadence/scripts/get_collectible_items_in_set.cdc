@@ -1,4 +1,4 @@
-import Crave from "../contracts/Crave.cdc"
+import Beam from "../contracts/Beam.cdc"
 
 // This script returns an array of the Collectible Item IDs that are
 // in the specified set
@@ -12,7 +12,7 @@ import Crave from "../contracts/Crave.cdc"
 
 pub fun main(setID: UInt32): [UInt32] {
 
-    let collectibleItems = Crave.getCollectibleItemsInSet(setID: setID)!
+    let collectibleItems = Beam.getCollectibleItemsInSet(setID: setID)!
 
     return collectibleItems
 }

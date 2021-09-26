@@ -1,5 +1,5 @@
 import NonFungibleToken from "../../contracts/NonFungibleToken.cdc"
-import Crave from "../../contracts/Crave.cdc"
+import Beam from "../../contracts/Beam.cdc"
 
 // This transaction transfers a number of Collectibles to a recipient
 
@@ -14,7 +14,7 @@ transaction(recipientAddress: Address, collectibleIDs: [UInt64]) {
     
     prepare(acct: AuthAccount) {
 
-        self.transferTokens <- acct.borrow<&Crave.Collection>(from: Crave.CollectionStoragePath)!.batchWithdraw(ids: collectibleIDs)
+        self.transferTokens <- acct.borrow<&Beam.Collection>(from: Beam.CollectionStoragePath)!.batchWithdraw(ids: collectibleIDs)
     }
 
     execute {
@@ -23,8 +23,8 @@ transaction(recipientAddress: Address, collectibleIDs: [UInt64]) {
         let recipient = getAccount(recipientAddress)
 
         // get the Collection reference for the receiver
-        let receiverRef = recipient.getCapability(Crave.CollectionPublicPath).borrow<&{Crave.CraveCollectionPublic}>()
-            ?? panic("Could not borrow a reference to the recipients Crave receiver")
+        let receiverRef = recipient.getCapability(Beam.CollectionPublicPath).borrow<&{Beam.BeamCollectionPublic}>()
+            ?? panic("Could not borrow a reference to the recipients Beam receiver")
 
         // deposit the NFT in the receivers collection
         receiverRef.batchDeposit(tokens: <-self.transferTokens)

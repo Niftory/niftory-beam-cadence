@@ -1,4 +1,4 @@
-import Crave from "../../contracts/Crave.cdc"
+import Beam from "../../contracts/Beam.cdc"
 
 // This transaction is for the admin to create a new set resource
 // and store it in the top shot smart contract
@@ -10,15 +10,15 @@ import Crave from "../../contracts/Crave.cdc"
 transaction(setName: String, setIdentityURL: String?, description: String?) {
     
     // Local variable for the Admin object
-    let adminRef: &Crave.Admin
+    let adminRef: &Beam.Admin
     let currSetID: UInt32
 
     prepare(acct: AuthAccount) {
 
         // borrow a reference to the Admin resource in storage
-        self.adminRef = acct.borrow<&Crave.Admin>(from: Crave.AdminStoragePath)
+        self.adminRef = acct.borrow<&Beam.Admin>(from: Beam.AdminStoragePath)
             ?? panic("Could not borrow a reference to the Admin resource")
-        self.currSetID = Crave.nextSetID;
+        self.currSetID = Beam.nextSetID;
     }
 
     execute {
@@ -28,7 +28,7 @@ transaction(setName: String, setIdentityURL: String?, description: String?) {
     }
 
     post {
-        Crave.SetData(setID: self.currSetID).name == setName:
+        Beam.SetData(setID: self.currSetID).name == setName:
           "Could not find the specified set"
     }
 }

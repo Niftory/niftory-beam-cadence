@@ -1,8 +1,8 @@
-import Crave from "../contracts/Crave.cdc"
+import Beam from "../contracts/Beam.cdc"
 
 pub fun main(address: Address): Bool {
 
     return getAccount(address)
-        .getCapability<&{Crave.CraveCollectionPublic}>(Crave.CollectionPublicPath)
+        .getCapability<&{Beam.BeamCollectionPublic}>(Beam.CollectionPublicPath)
         .check()
 }

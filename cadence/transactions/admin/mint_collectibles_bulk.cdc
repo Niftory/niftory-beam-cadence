@@ -1,4 +1,4 @@
-import Crave from "../../contracts/Crave.cdc"
+import Beam from "../../contracts/Beam.cdc"
 
 // This transaction mints multiple moments 
 // from a single set/collectible item combination (otherwise known as edition)
@@ -13,12 +13,12 @@ import Crave from "../../contracts/Crave.cdc"
 transaction(setID: UInt32, collectibleItemID: UInt32, quantity: UInt64, recipientAddr: Address) {
 
     // Local variable for the topshot Admin object
-    let adminRef: &Crave.Admin
+    let adminRef: &Beam.Admin
 
     prepare(acct: AuthAccount) {
 
         // borrow a reference to the Admin resource in storage
-        self.adminRef = acct.borrow<&Crave.Admin>(from: Crave.AdminStoragePath)!
+        self.adminRef = acct.borrow<&Beam.Admin>(from: Beam.AdminStoragePath)!
     }
 
     execute {
@@ -33,7 +33,7 @@ transaction(setID: UInt32, collectibleItemID: UInt32, quantity: UInt64, recipien
         let recipient = getAccount(recipientAddr)
 
         // get the Collection reference for the receiver
-        let receiverRef = recipient.getCapability(Crave.CollectionPublicPath).borrow<&{Crave.CraveCollectionPublic}>()
+        let receiverRef = recipient.getCapability(Beam.CollectionPublicPath).borrow<&{Beam.BeamCollectionPublic}>()
             ?? panic("Cannot borrow a reference to the recipient's collection")
 
         // deposit the NFT in the receivers collection

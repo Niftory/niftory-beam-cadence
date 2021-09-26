@@ -1,4 +1,4 @@
-import Crave from "../contracts/Crave.cdc"
+import Beam from "../contracts/Beam.cdc"
 
 // This is the script to get a list of all the NFTs an account owns
 // Just change the argument to `getAccount` to whatever account you want
@@ -9,17 +9,17 @@ import Crave from "../contracts/Crave.cdc"
 //
 // account: The Flow Address of the account whose Collectible data needs to be read
 
-// Returns: [Crave.NFT]
+// Returns: [Beam.NFT]
 // list of all NFTs an account owns
 
-pub fun main(account: Address): [Crave.CollectibleData] {
+pub fun main(account: Address): [Beam.CollectibleData] {
 
     let acct = getAccount(account)
 
-    let collectionRef = acct.getCapability(Crave.CollectionPublicPath)
-        .borrow<&{Crave.CraveCollectionPublic}>()!
+    let collectionRef = acct.getCapability(Beam.CollectionPublicPath)
+        .borrow<&{Beam.BeamCollectionPublic}>()!
 
-    var entities: [Crave.CollectibleData] = []
+    var entities: [Beam.CollectibleData] = []
 
     for id in collectionRef.getIDs() {
         

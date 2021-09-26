@@ -1,4 +1,4 @@
-import Crave from "../contracts/Crave.cdc"
+import Beam from "../contracts/Beam.cdc"
 
 // This is the script to get a list of all the Collectible ids an account owns
 // Just change the argument to `getAccount` to whatever account you want
@@ -16,8 +16,8 @@ pub fun main(account: Address): [UInt64] {
 
     let acct = getAccount(account)
 
-    let collectionRef = acct.getCapability(Crave.CollectionPublicPath)
-                            .borrow<&{Crave.CraveCollectionPublic}>()!
+    let collectionRef = acct.getCapability(Beam.CollectionPublicPath)
+                            .borrow<&{Beam.BeamCollectionPublic}>()!
 
     log(collectionRef.getIDs())
 

@@ -1,4 +1,4 @@
-import Crave from "../../contracts/Crave.cdc"
+import Beam from "../../contracts/Beam.cdc"
 
 // This transaction is for retiring all collectible items from a set, which
 // makes it so that collectibles can no longer be minted
@@ -9,12 +9,12 @@ import Crave from "../../contracts/Crave.cdc"
 // setID: the ID of the set to be retired entirely
 
 transaction(setID: UInt32) {
-    let adminRef: &Crave.Admin
+    let adminRef: &Beam.Admin
 
     prepare(acct: AuthAccount) {
 
         // borrow a reference to the Admin resource in storage
-        self.adminRef = acct.borrow<&Crave.Admin>(from: Crave.AdminStoragePath)
+        self.adminRef = acct.borrow<&Beam.Admin>(from: Beam.AdminStoragePath)
             ?? panic("No admin resource in storage")
     }
 

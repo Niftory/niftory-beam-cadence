@@ -1,12 +1,12 @@
-import Crave from "../contracts/Crave.cdc"
+import Beam from "../contracts/Beam.cdc"
 
-// This script reads the current Series from the Crave contract and 
+// This script reads the current Series from the Beam contract and 
 // returns that number to the caller
 
-// Returns: Crave.Series
-// The Current Series struct in the Crave contract
+// Returns: Beam.Series
+// The Current Series struct in the Beam contract
 
-pub fun main(): Crave.CurrSeriesData {
-    let currSeries = Crave.CurrSeriesData()
+pub fun main(): Beam.CurrSeriesData {
+    let currSeries = Beam.CurrSeriesData()
     return currSeries
 }

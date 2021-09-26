@@ -1,6 +1,6 @@
-import Crave from "../../contracts/Crave.cdc"
+import Beam from "../../contracts/Beam.cdc"
 
-// This transaction is how a Crave admin adds a created Collectible Item to a Set
+// This transaction is how a Beam admin adds a created Collectible Item to a Set
 
 // Parameters:
 //
@@ -9,13 +9,13 @@ import Crave from "../../contracts/Crave.cdc"
 
 transaction(setID: UInt32, collectibleItemID: UInt32) {
 
-    // Local variable for the Crave Admin object
-    let adminRef: &Crave.Admin
+    // Local variable for the Beam Admin object
+    let adminRef: &Beam.Admin
 
     prepare(acct: AuthAccount) {
 
         // borrow a reference to the Admin resource in storage
-        self.adminRef = acct.borrow<&Crave.Admin>(from: Crave.AdminStoragePath)
+        self.adminRef = acct.borrow<&Beam.Admin>(from: Beam.AdminStoragePath)
             ?? panic("Could not borrow a reference to the Admin resource")
     }
 
@@ -30,7 +30,7 @@ transaction(setID: UInt32, collectibleItemID: UInt32) {
 
     post {
 
-        Crave.getCollectibleItemsInSet(setID: setID)!.contains(collectibleItemID): 
+        Beam.getCollectibleItemsInSet(setID: setID)!.contains(collectibleItemID): 
             "set does not contain collectibleItemID"
     }
 }

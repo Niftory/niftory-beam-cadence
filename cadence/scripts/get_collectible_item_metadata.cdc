@@ -1,7 +1,7 @@
-import Crave from "../contracts/Crave.cdc"
+import Beam from "../contracts/Beam.cdc"
 
 // This script returns the full metadata associated with a Collectible Item
-// in the Crave smart contract
+// in the Beam smart contract
 
 // Parameters:
 //
@@ -13,7 +13,7 @@ import Crave from "../contracts/Crave.cdc"
 
 pub fun main(collectibleItemID: UInt32): {String:String} {
 
-    let metadata = Crave.getCollectibleItemMetaData(collectibleItemID: collectibleItemID) ?? panic("Play doesn't exist")
+    let metadata = Beam.getCollectibleItemMetaData(collectibleItemID: collectibleItemID) ?? panic("Play doesn't exist")
 
     log(metadata)
 

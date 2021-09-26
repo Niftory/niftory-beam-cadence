@@ -1,4 +1,4 @@
-import Crave from "../contracts/Crave.cdc"
+import Beam from "../contracts/Beam.cdc"
 
 // This script gets the serial number of a Collectible
 // by borrowing a reference to the Collectible 
@@ -14,8 +14,8 @@ import Crave from "../contracts/Crave.cdc"
 
 pub fun main(account: Address, id: UInt64): UInt32 {
 
-    let collectionRef = getAccount(account).getCapability(Crave.CollectionPublicPath)
-        .borrow<&{Crave.CraveCollectionPublic}>()
+    let collectionRef = getAccount(account).getCapability(Beam.CollectionPublicPath)
+        .borrow<&{Beam.BeamCollectionPublic}>()
         ?? panic("Could not get public Collectible collection reference")
 
     let token = collectionRef.borrowCollectible(id: id)

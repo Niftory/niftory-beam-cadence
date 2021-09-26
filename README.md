@@ -1,4 +1,4 @@
-# niftory-crave-cadence
+# niftory-Beam-cadence
 
 This repo contains the smart contracts, supporting transactions and scripts, and test suite for the KOTD collectible experience, built on Flow.
 

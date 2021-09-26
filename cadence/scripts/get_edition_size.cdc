@@ -1,4 +1,4 @@
-import Crave from "../contracts/Crave.cdc"
+import Beam from "../contracts/Beam.cdc"
 
 // This script returns the number of specified Collectibles that have been
 // minted for the specified edition
@@ -13,7 +13,7 @@ import Crave from "../contracts/Crave.cdc"
 
 pub fun main(setID: UInt32, collectibleItemID: UInt32): UInt32 {
 
-    let editionSize = Crave.getNumCollectiblesInEdition(setID: setID, collectibleItemID: collectibleItemID)
+    let editionSize = Beam.getNumCollectiblesInEdition(setID: setID, collectibleItemID: collectibleItemID)
         ?? panic("Could not find the specified edition")
 
     return editionSize

@@ -1,7 +1,7 @@
-import Crave from "../../contracts/Crave.cdc"
+import Beam from "../../contracts/Beam.cdc"
 
 // This transaction creates a new Collectible Item struct 
-// and stores it in the Crave smart contract
+// and stores it in the Beam smart contract
 
 // Parameters:
 //
@@ -14,16 +14,16 @@ import Crave from "../../contracts/Crave.cdc"
 
 transaction(name: String, description: String, mediaUrl: String, mediaType: String, externalLink: String, featuredArtists: [String]) {
 
-    // Local variable for the Crave Admin object
-    let adminRef: &Crave.Admin
+    // Local variable for the Beam Admin object
+    let adminRef: &Beam.Admin
     let currCollectibleItemID: UInt32
     let metadata: {String: String}
 
     prepare(acct: AuthAccount) {
 
         // borrow a reference to the admin resource
-        self.currCollectibleItemID = Crave.nextCollectibleItemID;
-        self.adminRef = acct.borrow<&Crave.Admin>(from: Crave.AdminStoragePath)
+        self.currCollectibleItemID = Beam.nextCollectibleItemID;
+        self.adminRef = acct.borrow<&Beam.Admin>(from: Beam.AdminStoragePath)
             ?? panic("No admin resource in storage")
         self.metadata = {
             "name": name,
@@ -41,7 +41,7 @@ transaction(name: String, description: String, mediaUrl: String, mediaType: Stri
 
     post {
         
-        Crave.getCollectibleItemMetaData(collectibleItemID: self.currCollectibleItemID) != nil:
+        Beam.getCollectibleItemMetaData(collectibleItemID: self.currCollectibleItemID) != nil:
             "collectibleItemID doesnt exist"
     }
 }

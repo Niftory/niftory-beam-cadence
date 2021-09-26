@@ -1,14 +1,14 @@
 import NonFungibleToken from "../../contracts/NonFungibleToken.cdc"
-import Crave from "../../contracts/Crave.cdc"
+import Beam from "../../contracts/Beam.cdc"
 
 
 // This transaction transfers a Collectible to a recipient
 
-// This transaction is how a Crave user would transfer a Collectible
+// This transaction is how a Beam user would transfer a Collectible
 // from their account to another account
-// The recipient must have a Crave Collection object stored
+// The recipient must have a Beam Collection object stored
 // and a public NiftoryCollectionPublic capability stored at
-// Crave.CollectionPublicPath
+// Beam.CollectionPublicPath
 
 // Parameters:
 //
@@ -23,8 +23,8 @@ transaction(recipient: Address, withdrawID: UInt64) {
     prepare(acct: AuthAccount) {
         log("hello world")
         // borrow a reference to the owner's collection
-        let collectionRef = acct.borrow<&Crave.Collection>(from: Crave.CollectionStoragePath)
-            ?? panic("Could not borrow a reference to the stored Crave collection")
+        let collectionRef = acct.borrow<&Beam.Collection>(from: Beam.CollectionStoragePath)
+            ?? panic("Could not borrow a reference to the stored Beam collection")
                 
         // withdraw the NFT
         self.transferToken <- collectionRef.withdraw(withdrawID: withdrawID)
@@ -35,7 +35,7 @@ transaction(recipient: Address, withdrawID: UInt64) {
         let recipient = getAccount(recipient)
 
         // get the Collection reference for the receiver
-        let receiverRef = recipient.getCapability(Crave.CollectionPublicPath).borrow<&{Crave.CraveCollectionPublic}>()
+        let receiverRef = recipient.getCapability(Beam.CollectionPublicPath).borrow<&{Beam.BeamCollectionPublic}>()
             ?? panic("Cannot borrow a reference to the recipient's collectible collection")
 
 

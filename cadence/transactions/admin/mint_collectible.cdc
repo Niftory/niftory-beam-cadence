@@ -1,4 +1,4 @@
-import Crave from "../../contracts/Crave.cdc"
+import Beam from "../../contracts/Beam.cdc"
 
 // This transaction is what an admin would use to mint a single new collectibleItem
 // and deposit it in a user's collection
@@ -11,11 +11,11 @@ import Crave from "../../contracts/Crave.cdc"
 
 transaction(setID: UInt32, collectibleItemID: UInt32, recipientAddr: Address) {
     // local variable for the admin reference
-    let adminRef: &Crave.Admin
+    let adminRef: &Beam.Admin
 
     prepare(acct: AuthAccount) {
         // borrow a reference to the Admin resource in storage
-        self.adminRef = acct.borrow<&Crave.Admin>(from: Crave.AdminStoragePath)!
+        self.adminRef = acct.borrow<&Beam.Admin>(from: Beam.AdminStoragePath)!
     }
 
     execute {
@@ -29,7 +29,7 @@ transaction(setID: UInt32, collectibleItemID: UInt32, recipientAddr: Address) {
         let recipient = getAccount(recipientAddr)
 
         // get the Collection reference for the receiver
-        let receiverRef = recipient.getCapability(Crave.CollectionPublicPath).borrow<&{Crave.CraveCollectionPublic}>()
+        let receiverRef = recipient.getCapability(Beam.CollectionPublicPath).borrow<&{Beam.BeamCollectionPublic}>()
             ?? panic("Cannot borrow a reference to the recipient's collectible collection")
 
         // deposit the NFT in the receivers collection
